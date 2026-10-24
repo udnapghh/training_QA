@@ -1,0 +1,157 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-10-24T07:03:33.059Z",
+    "end": "2026-10-24T07:03:37.327Z",
+    "duration": 4268,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2da3fc59-a8b1-49de-8ed6-ba53f268c131",
+      "title": "",
+      "fullFile": "C:\\Users\\pandu\\Documents\\Development\\Belajar QA\\Homework 8\\test\\belajar.test.js",
+      "file": "\\test\\belajar.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bd021b21-9717-4162-9e28-205ba9ff004f",
+          "title": "Web UI Automation - Belajar Bareng",
+          "fullFile": "C:\\Users\\pandu\\Documents\\Development\\Belajar QA\\Homework 8\\test\\belajar.test.js",
+          "file": "\\test\\belajar.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "fullTitle": "Web UI Automation - Belajar Bareng \"before all\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "timedOut": false,
+              "duration": 852,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser('chrome').build();\nawait driver.manage().window().maximize();",
+              "err": {},
+              "uuid": "5a1de339-5e64-4092-8208-9bed62727b22",
+              "parentUUID": "bd021b21-9717-4162-9e28-205ba9ff004f",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "fullTitle": "Web UI Automation - Belajar Bareng \"after all\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "timedOut": false,
+              "duration": 84,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driver) {\n    await driver.quit();\n}",
+              "err": {},
+              "uuid": "3e2d06b2-08a0-4d2e-a365-64d249e41dcc",
+              "parentUUID": "bd021b21-9717-4162-9e28-205ba9ff004f",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "1. User should be able to login with valid data",
+              "fullTitle": "Web UI Automation - Belajar Bareng 1. User should be able to login with valid data",
+              "timedOut": false,
+              "duration": 2170,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1. Buka halaman login\nawait driver.get('https://belajar-bareng.onrender.com/');\n// 2. Cari elemen username, password, dan tombol login\nlet usernameInput = await driver.wait(\n    until.elementLocated(By.xpath(\"//input[@data-testid='username-input']\")),\n    15000\n);\nlet passwordInput = await driver.findElement(\n    By.css(\".password-wrapper input, input[type='password']\")\n);\nlet loginButton = await driver.findElement(\n    By.xpath(\"//button[@data-testid='login-button']\")\n);\n// 3. Beri aksi input text dan klik tombol login\nawait usernameInput.sendKeys(\"admin\");\nawait passwordInput.sendKeys(\"admin\");\nawait loginButton.click();\n// 4. Tunggu hingga berpindah ke halaman /users dan element List Users tampil\nawait driver.wait(until.urlContains(\"/users\"), 15000);\nlet listUsersHeading = await driver.wait(\n    until.elementLocated(By.xpath(\"//*[contains(text(), 'List Users')]\")),\n    10000\n);\n// 5. Assertion: Validasi element tampil (.isDisplayed) dan teks sesuai (.strictEqual)\nlet isListUsersDisplayed = await listUsersHeading.isDisplayed();\nassert.strictEqual(isListUsersDisplayed, true);\nlet headingText = await listUsersHeading.getText();\nassert.strictEqual(headingText, \"List Users\");",
+              "err": {},
+              "uuid": "65829d29-8fde-49a6-9c82-14485483c2c2",
+              "parentUUID": "bd021b21-9717-4162-9e28-205ba9ff004f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "2. User should be able to add a new user",
+              "fullTitle": "Web UI Automation - Belajar Bareng 2. User should be able to add a new user",
+              "timedOut": false,
+              "duration": 1157,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1. Cari tombol Add User dan klik\nlet addButton = await driver.wait(\n    until.elementLocated(By.xpath(\"//button[@data-testid='add-button']\")),\n    10000\n);\nawait addButton.click();\n// Tunggu hingga muncul form input nama dan umur\nlet nameInput = await driver.wait(\n    until.elementLocated(\n        By.xpath(\"//input[@placeholder='Name' or @placeholder='Username' or @data-testid='username-input' or @type='text']\")\n    ),\n    10000\n);\nlet ageInput = await driver.findElement(\n    By.xpath(\"//input[@placeholder='Age' or @data-testid='age-input' or @type='number']\")\n);\nlet submitButton = await driver.findElement(\n    By.xpath(\"//button[@data-testid='submit-button' or @type='submit']\")\n);\n// 2. Beri aksi input nama dan umur user baru, lalu klik tombol Submit/Add\nconst newUserName = \"Pandu\";\nconst newUserAge = \"25\";\nawait nameInput.clear();\nawait nameInput.sendKeys(newUserName);\nawait ageInput.clear();\nawait ageInput.sendKeys(newUserAge);\nawait submitButton.click();\n// 3. Tunggu toast muncul di HTML dan terlihat di layar\nlet toastMessage = await driver.wait(\n    until.elementLocated(By.xpath(\"//*[contains(text(), 'User successfully added')]\")),\n    10000\n);\nawait driver.wait(until.elementIsVisible(toastMessage), 10000);\n// 4. Assertion: Validasi toast tampil (.isDisplayed) dan teks sesuai (.strictEqual)\nlet isToastDisplayed = await toastMessage.isDisplayed();\nassert.strictEqual(isToastDisplayed, true);\nlet toastText = await toastMessage.getText();\nassert.strictEqual(toastText.includes(\"User successfully added\"), true);",
+              "err": {},
+              "uuid": "fd5784dd-6972-4f60-8ace-93b47d695933",
+              "parentUUID": "bd021b21-9717-4162-9e28-205ba9ff004f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "65829d29-8fde-49a6-9c82-14485483c2c2",
+            "fd5784dd-6972-4f60-8ace-93b47d695933"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3327,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 30000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 30000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "12.0.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
