@@ -1,0 +1,26 @@
+{
+  "name": "homework-11",
+  "version": "1.0.0",
+  "description": "Web UI Automation - Login SauceDemo dengan Page Object Model + Visual Regression",
+  "main": "specs/Login.spec.js",
+  "scripts": {
+    "test": "mocha specs/**/*.spec.js --timeout 60000"
+  },
+  "keywords": [
+    "selenium",
+    "pom",
+    "visual-regression",
+    "saucedemo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0",
+    "selenium-webdriver": "^4.27.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.8.2"
+  }
+}
