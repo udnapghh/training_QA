@@ -1,0 +1,10 @@
+export const credentials = {
+  valid: {
+    username: 'standard_user',
+    password: 'secret_sauce',
+  },
+  invalid: {
+    username: 'invalid_user',
+    password: 'wrong_password',
+  },
+};
